@@ -54,3 +54,11 @@ collected images likely to be uploaded by random users from their phones, random
 objects, plants that aren't cannabis and images with overlayed text. Many of
 the sick samples were from sites that tend to add overlay text describing the
 cannabis's condition.
+
+## Data distribution
+healthy  1120
+sick     946
+not_weed 964
+
+train/validation/test
+60/20/20

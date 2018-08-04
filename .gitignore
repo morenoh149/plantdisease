@@ -2,3 +2,4 @@
 *.swp
 input
 *.zip
+.ipynb_checkpoints
