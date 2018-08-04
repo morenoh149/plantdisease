@@ -44,3 +44,13 @@ resources:
 * https://www.pinterest.com/search/pins/?q=nitrogen%20deficiency%20canabis&rs=typed&term_meta[]=nitrogen%7Ctyped&term_meta[]=deficiency%7Ctyped&term_meta[]=canabis%7Ctyped
 * http://www.marijuana-seeds.net/marijuana-plant-problems
 * https://www.growweedeasy.com/cannabis-symptoms-pictures/
+
+the "other" dataset was generated from:
+* https://www.kaggle.com/alxmamaev/flowers-recognition/home
+* https://www.kaggle.com/sayangoswami/reddit-memes-dataset/home
+* https://www.kaggle.com/jessicali9530/caltech256/home
+we wanted to build an "other" dataset with images that may fool the model, we
+collected images likely to be uploaded by random users from their phones, random
+objects, plants that aren't cannabis and images with overlayed text. Many of
+the sick samples were from sites that tend to add overlay text describing the
+cannabis's condition.
