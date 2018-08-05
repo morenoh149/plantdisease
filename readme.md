@@ -1,6 +1,6 @@
 # Plant disease
 
-login https://354362171010.signin.aws.amazon.com/console
+Adapted from https://github.com/ClaudeCoulombe/deep-learning-with-python-notebooks/blob/master/5.3-using-a-pretrained-convnet.ipynb
 
 ## data
 
