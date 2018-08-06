@@ -44,6 +44,7 @@ resources:
 * https://www.pinterest.com/search/pins/?q=nitrogen%20deficiency%20canabis&rs=typed&term_meta[]=nitrogen%7Ctyped&term_meta[]=deficiency%7Ctyped&term_meta[]=canabis%7Ctyped
 * http://www.marijuana-seeds.net/marijuana-plant-problems
 * https://www.growweedeasy.com/cannabis-symptoms-pictures/
+* https://towardsdatascience.com/build-a-taylor-swift-detector-with-the-tensorflow-object-detection-api-ml-engine-and-swift-82707f5b4a56
 
 the "other" dataset was generated from:
 * https://www.kaggle.com/alxmamaev/flowers-recognition/home
@@ -62,3 +63,29 @@ not_weed 964
 
 train/validation/test
 60/20/20
+
+## Notes
+* data augmentation make validation accuracy worse on first attempt. Must mean
+the transformations are not representative of valid data for our problem.
+  * find transformations that produce valid data for our problem
+* resnet50 may overfit on datasets < 10K images
+  * try VGG16
+* visualize misclassified samples to gain intuition about where the model is
+struggling
+* curate more data
+ * consider dropping photos of groups of plants
+
+## gcloud notes
+* see projects `gcloud projects list`
+* see current project `gcloud config list project`
+* change project `gcloud config set project <project name>`
+* set bucket name `BUCKET_NAME="keras-class-191806"`
+* set your preferred region `REGION=us-east1`
+* copy model over `gsutil cp src gs://$BUCKET_NAME/saved_model.pg` NOTE: ml-engine
+expects your model's protocol buffer file to be name `saved_model.{pb,pbtxt}`
+* register ml-engine entry `gcloud ml-engine models create <model name>`
+* deploy version of model `gcloud ml-engine versions create v4 --model=plantDisease01 --origin=gs://keras-class-191806/plantDisease01/vgg16_data_augmented-tf --runtime-version=1.4` the origin arg must be a local dir with the full tf model (protocol buffer and variables)
+* see models `gcloud ml-engine models list`
+* craft request payload `python -c 'import base64, sys, json; img = base64.b64encode(open(sys.argv[1], "rb").read()).decode(); print(json.dumps({"foo-input": {"b64": img}}))' test_healthy.jpg &> request.json`
+* craft request `python -c 'req = []; [req.append(0.2) for i in range(224*224)]; print(req)' &> request-float32.json`
+* inference `gcloud ml-engine predict --model=plantDisease01 --json-instances=request.json`
